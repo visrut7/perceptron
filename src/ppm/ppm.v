@@ -14,14 +14,14 @@ pub struct PPM {
 	buffer       []int           @[required]
 }
 
-pub fn save_ppm_to_file(ppm PPM, file_name string) {
-	mut file := os.open_file(file_name, 'w') or { panic(err) }
-	file.write_string('${ppm.magic_number}\n') or { panic(err) }
-	file.write_string('${ppm.dimensions.x} ${ppm.dimensions.y}\n') or { panic(err) }
-	file.write_string('${ppm.max_value}\n') or { panic(err) }
+pub fn save_ppm_to_file(ppm PPM, file_name string) ! {
+	mut file := os.open_file(file_name, 'w')!
+	file.write_string('${ppm.magic_number}\n')!
+	file.write_string('${ppm.dimensions.x} ${ppm.dimensions.y}\n')!
+	file.write_string('${ppm.max_value}\n')!
 
 	for num in ppm.buffer {
-		file.write_string('${num} ') or { panic(err) }
+		file.write_string('${num} ')!
 	}
 
 	file.close()

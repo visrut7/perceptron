@@ -5,19 +5,19 @@ import ppm
 
 fn main() {
 	image_dimensions := ppm.ImageDimensions{
-		x: 1
-		y: 1
+		x: 2
+		y: 2
 	}
 
 	image1 := ppm.PPM{
 		max_value: 255
 		dimensions: image_dimensions
-		buffer: [0, 255, 0]
+		buffer: [0, 255, 0, 255, 0, 0, 0, 0, 255, 0, 255, 0]
 	}
 
 	if !os.is_dir('images') {
-		os.mkdir('images') or { panic(err) }
+		os.mkdir('images')!
 	}
 
-	ppm.save_ppm_to_file(image1, 'images/image1.ppm')
+	ppm.save_ppm_to_file(image1, 'images/image1.ppm')!
 }
