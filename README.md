@@ -5,4 +5,4 @@
 #### Basic Commands
 - Only for Linux now
 - v run .
-- display -resize 400x400 -filter Lanczos -sharpen 0x1 images/image1.ppm 
+- display -resize 400x400 -filter Point images/image1.ppm 
