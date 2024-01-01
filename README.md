@@ -1,8 +1,10 @@
-## Perceptron
+# Perceptron
 
-- Implementation in `V`
+Inspired by Tsoding Daily Video: https://www.youtube.com/watch?v=WEk_grxrCcg
 
-#### Basic Commands
-- Only for Linux now
-- v run .
-- display -resize 400x400 -filter Point images/image1.ppm 
+## Quick Start
+
+```console
+$ v run .
+$ display -resize 400x400 -filter Point images/perceptron.ppm
+```
