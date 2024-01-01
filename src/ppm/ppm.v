@@ -1,7 +1,6 @@
 module ppm
 
 import os
-import math
 import matrix { Matrix }
 
 pub struct ImageDimensions {
@@ -26,11 +25,11 @@ pub fn create_ppm_from_matrix(mat Matrix) PPM {
 	for row in mat {
 		for value in row {
 			// Convert the f64 value to an integer for grayscale (0 or 255)
-			color_value := int(math.ceil(value * 255))
+			color_value := (value + 255) / (2.0 * 255)
 			// Append RGB components (all the same for grayscale)
-			buffer << color_value
-			buffer << color_value
-			buffer << color_value
+			buffer << int(255 * (1.0 - color_value))
+			buffer << int(255 * (1.0 - color_value))
+			buffer << int(255 * color_value)
 		}
 	}
 

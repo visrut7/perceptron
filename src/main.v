@@ -2,6 +2,7 @@ module main
 
 import os
 import rand
+import ppm
 import input_layer { InputLayer }
 import perceptron { Perceptron }
 
@@ -55,5 +56,8 @@ fn main() {
 
 	train(mut nn, mut layer)
 	accuracy := test(nn, mut layer)
-	println(accuracy)
+	println('Accuracy: ${accuracy}')
+
+	image := ppm.create_ppm_from_matrix(nn.get_weights())
+	image.save_image('images/perceptron.ppm')!
 }
