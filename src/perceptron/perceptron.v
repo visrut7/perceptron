@@ -1,6 +1,5 @@
 module perceptron
 
-import math
 import matrix { Matrix }
 
 pub struct Perceptron {
@@ -17,7 +16,7 @@ pub fn (p Perceptron) feed_forward(inputs Matrix) f64 {
 		}
 	}
 
-	return sigmoid(output)
+	return output
 }
 
 pub fn (mut p Perceptron) sub_matrix(mat Matrix) {
@@ -42,18 +41,6 @@ pub fn (p Perceptron) print_perceptron() {
 	}
 }
 
-pub fn (mut p Perceptron) apply_sigmoid() {
-	for i in 0 .. p.weights.len {
-		for j in 0 .. p.weights[0].len {
-			p.weights[i][j] = sigmoid(p.weights[i][j])
-		}
-	}
-}
-
 pub fn (p Perceptron) get_weights() Matrix {
 	return p.weights
-}
-
-fn sigmoid(x f64) f64 {
-	return 1.0 / (1.0 + math.exp(-x))
 }
