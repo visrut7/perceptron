@@ -15,12 +15,12 @@ fn main() {
 	mut layer := InputLayer{matrix, width}
 
 	layer.draw_random_circle()
-	image1 := ppm.create_ppm_from_inputs(layer.get_matrix())
-	ppm.save_ppm_to_file(image1, 'images/circle.ppm')!
+	image1 := ppm.create_ppm_from_matrix(layer.get_matrix())
+	image1.save_image('images/circle.ppm')!
 	layer.clear_layer()
 
 	layer.draw_random_rectangle()
-	image2 := ppm.create_ppm_from_inputs(layer.get_matrix())
-	ppm.save_ppm_to_file(image2, 'images/rectangle.ppm')!
+	image2 := ppm.create_ppm_from_matrix(layer.get_matrix())
+	image2.save_image('images/rectangle.ppm')!
 	layer.clear_layer()
 }
