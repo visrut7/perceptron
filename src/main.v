@@ -1,5 +1,6 @@
 module main
 
+import os
 import rand
 import ppm
 
@@ -51,6 +52,14 @@ fn draw_random_rectangle(mut inputs [width][width]f64) {
 	}
 }
 
+fn clear_matrix(mut matrix [width][width]f64) {
+	for mut row in matrix {
+		for mut cell in row {
+			cell = 0.0
+		}
+	}
+}
+
 fn print_matrix(matrix [width][width]f64) {
 	for row in matrix {
 		println(row)
@@ -58,15 +67,19 @@ fn print_matrix(matrix [width][width]f64) {
 }
 
 fn main() {
+	if !os.is_dir('./images') {
+		os.mkdir('images')!
+	}
+
 	mut inputs := [width][width]f64{}
 
 	draw_random_circle(mut inputs)
-
 	image1 := ppm.create_ppm_from_inputs(inputs)
 	ppm.save_ppm_to_file(image1, 'images/circle.ppm')!
+	clear_matrix(mut inputs)
 
 	draw_random_rectangle(mut inputs)
-
 	image2 := ppm.create_ppm_from_inputs(inputs)
 	ppm.save_ppm_to_file(image2, 'images/rectangle.ppm')!
+	clear_matrix(mut inputs)
 }
