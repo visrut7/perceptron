@@ -1,11 +1,12 @@
 module input_layer
 
 import rand
+import matrix { Matrix }
 
 pub struct InputLayer {
 mut:
-	matrix [][]f64 @[required]
-	width  int     @[required]
+	mat   Matrix @[required]
+	width int    @[required]
 }
 
 pub fn (mut layer InputLayer) draw_random_circle() {
@@ -20,15 +21,15 @@ pub fn (mut layer InputLayer) draw_random_circle() {
 		return
 	}
 
-	for i in 0 .. layer.matrix.len {
-		for j in 0 .. layer.matrix[0].len {
+	for i in 0 .. layer.mat.len {
+		for j in 0 .. layer.mat[0].len {
 			// Calculate the distance from the center
 			di := i - point_displacement
 			dj := j - point_displacement
 
 			// Check if the point is inside the circle and assign 1.0 to inputs[i][j]
 			if di * di + dj * dj <= radius * radius {
-				layer.matrix[i][j] = 1.0
+				layer.mat[i][j] = 1.0
 			}
 		}
 	}
@@ -46,18 +47,18 @@ pub fn (mut layer InputLayer) draw_random_rectangle() {
 	rect_height := rand.int_in_range(min_dimension, layer.width - top_left_y) or { return }
 
 	// Fill the rectangle area in inputs with 1.0
-	for i in 0 .. layer.matrix.len {
-		for j in 0 .. layer.matrix[0].len {
+	for i in 0 .. layer.mat.len {
+		for j in 0 .. layer.mat[0].len {
 			if i >= top_left_x && i < top_left_x + rect_width && j >= top_left_y
 				&& j < top_left_y + rect_height {
-				layer.matrix[i][j] = 1.0
+				layer.mat[i][j] = 1.0
 			}
 		}
 	}
 }
 
 pub fn (mut layer InputLayer) clear_layer() {
-	for mut row in layer.matrix {
+	for mut row in layer.mat {
 		for mut cell in row {
 			cell = 0.0
 		}
@@ -65,11 +66,11 @@ pub fn (mut layer InputLayer) clear_layer() {
 }
 
 pub fn (mut layer InputLayer) print_matrix() {
-	for row in layer.matrix {
+	for row in layer.mat {
 		println(row)
 	}
 }
 
-pub fn (mut layer InputLayer) get_matrix() [][]f64 {
-	return layer.matrix
+pub fn (mut layer InputLayer) get_matrix() Matrix {
+	return layer.mat
 }

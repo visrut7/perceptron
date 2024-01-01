@@ -1,6 +1,8 @@
 module ppm
 
 import os
+import math
+import matrix { Matrix }
 
 pub struct ImageDimensions {
 	x int
@@ -14,17 +16,17 @@ pub struct PPM {
 	buffer       []int           @[required]
 }
 
-pub fn create_ppm_from_matrix(matrix [][]f64) PPM {
+pub fn create_ppm_from_matrix(mat Matrix) PPM {
 	dimensions := ImageDimensions{
-		x: matrix.len
-		y: matrix[0].len
+		x: mat.len
+		y: mat[0].len
 	}
 
 	mut buffer := []int{cap: dimensions.x * dimensions.y * 3}
-	for row in matrix {
+	for row in mat {
 		for value in row {
 			// Convert the f64 value to an integer for grayscale (0 or 255)
-			color_value := if value == 1.0 { 255 } else { 0 }
+			color_value := int(math.ceil(value * 255))
 			// Append RGB components (all the same for grayscale)
 			buffer << color_value
 			buffer << color_value
