@@ -16,7 +16,7 @@ pub struct PPM {
 	buffer       []int           @[required]
 }
 
-pub fn create_ppm_from_inputs(inputs [width][width]f64) PPM {
+pub fn create_ppm_from_inputs(inputs [][]f64) PPM {
 	dimensions := ImageDimensions{
 		x: inputs.len
 		y: inputs[0].len
